@@ -654,12 +654,9 @@ func main() {
 	// Close the window on leave, but not immediately, to avoid accidental closes
 	win.Connect("leave-notify-event", func() {
 		if *autohide {
-			src = glib.TimeoutAdd(uint(1000), func() bool {
-				mouseInsideDock = false
-				win.Hide()
-				src = 0
-				return false
-			})
+			mouseInsideDock = false
+			win.Hide()
+			return false
 		}
 	})
 
