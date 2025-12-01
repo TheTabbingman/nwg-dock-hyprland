@@ -334,7 +334,7 @@ func setupHotSpot(monitor gdk.Monitor, dockWindow *gtk.Window) gtk.Window {
 	if *autohide {
 		win.Connect("leave-notify-event", func() {
 			mouseInsideHotspot = false
-			glib.TimeoutAdd(1000, func() bool {
+			glib.TimeoutAdd(0, func() bool {
 				if !mouseInsideDock && !mouseInsideHotspot {
 					dockWindow.Hide()
 				}
@@ -656,7 +656,7 @@ func main() {
 	// Close the window on leave, but not immediately, to avoid accidental closes
 	win.Connect("leave-notify-event", func() {
 		if *autohide {
-			src = glib.TimeoutAdd(uint(1000), func() bool {
+			src = glib.TimeoutAdd(uint(0), func() bool {
 				mouseInsideDock = false
 				win.Hide()
 				src = 0
